@@ -7,13 +7,13 @@ const Navbar = () => {
         <div className="font-bold text-5xl">Histora Xplore</div>
         <ul className="flex justify-center items-center space-x-8">
           <li>
-            <a href="#home" className="text-grey-950 text-lg font-semibold p-5">
+            <a href="/" className="text-grey-950 text-lg font-semibold p-5">
               Home
             </a>
           </li>
           <li>
             <a
-              href="#about"
+              href="/explore"
               className="text-grey-950 text-lg font-semibold p-5"
             >
               Explore
@@ -21,7 +21,7 @@ const Navbar = () => {
           </li>
           <li>
             <a
-              href="#explore"
+              href="/discuss"
               className="text-grey-950 text-lg font-semibold p-5"
             >
               Discuss
