@@ -7,8 +7,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-content-left">
           <p>
-            Dive into the rich tapestry of history with
-            <strong>Histora Explore</strong>. Our platform brings the past to
+            Dive into the rich tapestry of history with <strong>Histora Xplore</strong>. Our platform brings the past to
             life, offering immersive insights into historical events, cultures,
             and places.
             <br />
