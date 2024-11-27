@@ -1,47 +1,47 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <header>
-      <nav className="bg-orange-600 p-4 flex justify-between">
+      <nav className="bg-orange-500 p-4 flex justify-between">
         <div className="font-bold text-5xl">Histora Xplore</div>
         <ul className="flex justify-center items-center space-x-8">
           <li>
-            <a href="/" className="text-grey-950 text-lg font-semibold p-5">
+            <Link to={"/"} className="text-grey-950 text-xl font-semibold p-5">
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/explore"
-              className="text-grey-950 text-lg font-semibold p-5"
+            <Link
+              to={"/explore"}
+              className="text-grey-950 text-xl font-semibold p-5"
             >
               Explore
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/discuss"
-              className="text-grey-950 text-lg font-semibold p-5"
+            <Link
+              to={"/discuss"}
+              className="text-grey-950 text-xl font-semibold p-5"
             >
               Discuss
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#contact"
-              className="text-grey-950 text-lg font-semibold p-5"
+            <Link
+              to={"/about"}
+              className="text-grey-950 text-xl font-semibold p-5"
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#contact"
-              className="text-grey-950 text-lg font-semibold p-5"
+            <Link
+              to={"/contact"}
+              className="text-grey-950 text-xl font-semibold p-5"
             >
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

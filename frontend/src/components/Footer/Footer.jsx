@@ -1,83 +1,71 @@
 import React from "react";
+import "./Footer.css";
 
-function Footer() {
+const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-200 py-10">
-      <div className="container mx-auto px-8 lg:px-32 grid grid-cols-1 md:grid-cols-2 gap-40">
-        <div className="flex flex-col space-y-4">
-          <h3 className="text-lg font-semibold text-orange-400">
-            About the Project
-          </h3>
-          <p className="text-sm text-gray-400">
-            History Explore is a platform designed to bring the past to life.
-            Discover historical events, famous figures, and untold stories that
-            shaped the world.
+    <div className="footer" id="footer">
+      <div className="footer-content">
+        <div className="footer-content-left">
+          <p>
+            Dive into the rich tapestry of history with
+            <strong>Histora Explore</strong>. Our platform brings the past to
+            life, offering immersive insights into historical events, cultures,
+            and places.
+            <br />
+            <br />
+            Join us as we connect stories from the past with the present, making
+            history accessible, engaging, and informative for everyone. Let's
+            explore the journey of humanity together!
           </p>
-        </div>
-
-        <div className="flex flex-row space-x-20">
-          <div className="flex flex-col space-y-4">
-            <h3 className="text-lg font-semibold text-orange-400">
-              Quick Links
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#home"
-                  className="text-sm hover:text-orange-300 transition-colors"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#about"
-                  className="text-sm hover:text-orange-300 transition-colors"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#explore"
-                  className="text-sm hover:text-orange-300 transition-colors"
-                >
-                  Explore
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className="text-sm hover:text-orange-300 transition-colors"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col space-y-4">
-            <h3 className="text-lg font-semibold text-orange-400">Team Info</h3>
-            <ul className="space-y-2">
-              <li className="text-sm">
-                <span className="text-orange-300">Vishal Bhat</span>
-              </li>
-              <li className="text-sm">
-                <span className="text-orange-300">V S Sreenivaas</span>
-              </li>
-              <li className="text-sm">
-                <span className="text-orange-300">Sushanth Joshi</span>
-              </li>
-            </ul>
+          <div className="footer-social-icons">
+            <a
+              href="https://www.instagram.com/vishalbhat07/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/vishalbhat07/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/VishalBhat07/Histora-Xplore"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fab fa-github"></i>
+            </a>
           </div>
         </div>
+        <div className="footer-content-center">
+          <h2>EXPLORE</h2>
+          <ul>
+            <li>Home</li>
+            <li>About Us</li>
+            <li>Explore History</li>
+            <li>Terms & Policies</li>
+          </ul>
+        </div>
+        <div className="footer-content-right">
+          <h2>CONTACT US</h2>
+          <ul>
+            <li>+91 7975806665</li>
+            <li>vishalkbhat.cs23@rvce.edu.in</li>
+            <li>vssreenivaas.cs23@rvce.edu.in</li>
+            <li>sushanthjoshi.cs23@rvce.edu.in</li>
+          </ul>
+        </div>
       </div>
-
-      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-xs text-gray-500">
-        <p>© 2024 History Explore. All rights reserved.</p>
-      </div>
-    </footer>
+      <hr />
+      <p className="footer-copyright">
+        Copyright 2024 &copy; HistoraExplore.com - All rights reserved.
+      </p>
+    </div>
   );
-}
+};
 
 export default Footer;

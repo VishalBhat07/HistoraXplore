@@ -1,0 +1,65 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; /* Set minimum height for full viewport */
+}
+
+.login-form {
+  border: 2px solid black;
+  background-color: #fff; /* White background for the form */
+  padding: 40px; /* Add some padding for content */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  width: 350px; /* Set a fixed width for the form */
+  margin-top: 50px;
+}
+
+.form-group {
+  margin-bottom: 15px; /* Space between form groups */
+}
+
+.form-group label {
+  display: block; /* Display labels on their own line */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Bold text for labels */
+}
+
+.form-group input {
+  display: block; /* Display inputs on their own line */
+  width: 100%; /* Make inputs full width */
+  padding: 10px; /* Add padding for inputs */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 3px; /* Rounded corners for inputs */
+  font-size: 16px; /* Set font size for inputs */
+}
+
+.login-form button {
+  background-color: #8bc34a; /* Forest green background for button */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Add padding for button content */
+  border: none; /* Remove default button border */
+  border-radius: 5px; /* Rounded corners for button */
+  cursor: pointer; /* Indicate hover interaction */
+  margin-top: 20px; /* Space between button and other elements */
+  width: 100%; /* Make button full width */
+  font-size: 16px; /* Set font size for button text */
+}
+
+.login-form button:hover {
+  background-color: #7aa03c; /* Darker green on hover */
+}
+
+.login-form p {
+  margin-top: 10px; /* Space between paragraph and link */
+  text-align: center; /* Center text for signup/signin links */
+}
+
+.login-form a {
+  color: #8bc34a; /* Forest green color for links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.login-form a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
