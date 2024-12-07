@@ -13,8 +13,8 @@ const Explore = () => {
 
   const handleYear = (year) => {
     setSelectedYear(year);
-  };
-
+  }; 
+  
   return (
     <div className="explore">
       <div className="map-search-container">
