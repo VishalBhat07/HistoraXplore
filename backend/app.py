@@ -6,7 +6,7 @@ import wikipediaapi
 from transformers import pipeline
 from groq import Groq
 import re,os
-os.environ['GROQ_API_KEY']="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"
+
 app = Flask(__name__, 
             static_folder='static',
             static_url_path='')
