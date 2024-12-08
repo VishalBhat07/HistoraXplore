@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import historyImage from "../../assets/history.jpeg";
 
 function HeroSection() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Function to handle API call
+  const handleSearch = async () => {
+    console.log(searchQuery);
+    if (!searchQuery.trim()) {
+      alert("Type something first !!");
+      return;
+    }
+    try {
+      const response = await fetch("https://example.com/api/search", {
+        method: "POST", // Change to GET if required by your API
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: searchQuery }),
+      });
+      const data = await response.json();
+      console.log("Search Results:", data);
+      // Handle the API response (e.g., display results)
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
+  };
+
   return (
     <section className="min-h-screen bg-gradient-to-b from-orange-500 to-[#1c1c1c]">
       <div className="section-container min-h-screen flex flex-col md:flex-row gap-10 items-center justify-center">
@@ -17,11 +42,20 @@ function HeroSection() {
               Login
             </button>
           </div>
-          <input
-            type="text"
-            placeholder="Start exploring ..."
-            className="w-full md:w-120 p-4 text-lg border-2 border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-lg"
-          />
+          <div className="relative w-full md:w-120">
+            <input
+              type="text"
+              placeholder="Start exploring ..."
+              className="text-slate-950 w-full p-4 text-lg border-2 border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-lg"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <span className="absolute inset-y-0 right-4 flex items-center text-gray-500">
+              <button onClick={handleSearch}>
+                <i className="fas fa-search"></i>
+              </button>
+            </span>
+          </div>
         </div>
         <div className="right-section p-8 md:p-20">
           <img

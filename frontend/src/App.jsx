@@ -7,6 +7,7 @@ import Explore from "./pages/Explore/Explore";
 import Discuss from "./pages/Discuss/Discuss";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   return (

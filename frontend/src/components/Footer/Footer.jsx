@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
@@ -7,7 +8,8 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-content-left">
           <p>
-            Dive into the rich tapestry of history with <strong>Histora Xplore</strong>. Our platform brings the past to
+            Dive into the rich tapestry of history with{" "}
+            <strong>Histora Xplore</strong>. Our platform brings the past to
             life, offering immersive insights into historical events, cultures,
             and places.
             <br />
@@ -43,10 +45,38 @@ const Footer = () => {
         <div className="footer-content-center">
           <h2>EXPLORE</h2>
           <ul>
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Explore History</li>
-            <li>Terms & Policies</li>
+            <li>
+              <Link
+                to={"/"}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/about"}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/explore"}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                Explore History
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/"}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                Terms & Policies
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="footer-content-right">
