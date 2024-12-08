@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
@@ -11,7 +11,6 @@ import Contact from "./pages/Contact/Contact";
 function App() {
   return (
     <>
-      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path={"/"} element={<Hero />} />
@@ -21,7 +20,6 @@ function App() {
           <Route path={"/contact"} element={<Contact />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
     </>
   );
 }
