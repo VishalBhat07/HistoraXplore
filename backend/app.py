@@ -29,12 +29,7 @@
 #             area_parts.append(address['country'])
 #         return ', '.join(area_parts[:2]) 
 #     except Exception as e:
-#         print(f"Error getting location: {e}")
-#         return None
-# def get_wiki_client():
-#     """
-#     Creates a Wikipedia API client with proper user agent configuration
-#     following Wikimedia Foundation guidelines
+# #             f"{area_name} histoguidelines
 #     """
 #     user_agent = "HistoraXplorer/1.0 (https://github.com/VishalBhat07/histora-xplore; sushanthjoshi.cs23@rvce.edu.in)"
 #     wiki = wikipediaapi.Wikipedia(
@@ -78,10 +73,8 @@
 
                 
 # #             except Exception as e:
-# #                 print(f"Error processing search term '{term}': {e}")
-# #                 continue
-
-# #         if not all_content:
+# #                 print(f"Error p
+# #             f"{area_name} histo
 # #             return f"No historical information found for {area_name} around {year}."
 
 # #         # Using Groq for summarization
@@ -106,10 +99,8 @@
 # #         return f"Error retrieving historical information for {area_name}."
 # def get_historical_summary(area_name, year):
 #     try:
-#         model = Groq(api_key=os.environ.get("GROQ_API_KEY"))
-#         wiki =get_wiki_client()
-#         search_terms = [
-#             f"{area_name} history",
+#         model = Groq(api_key=os.e
+# #             f"{area_name} histo",
 #             f"{area_name} historical events",
 #             area_name
 #         ]
@@ -174,30 +165,8 @@
 #         #return ' '.join(summary)
 
 #     except Exception as e:
-#         print(f"Error getting historical information: {e}")
-#         return f"Error retrieving historical information for {area_name}."
-
-# @app.route('/api/coordinates', methods=['POST'])
-# def handle_coordinates():
-#     try:
-#         data = request.json
-#         lat = data.get('lat')
-#         lng = data.get('lng')
-#         year = data.get('year', 2000)
-#         area_name = get_area_name(lat, lng)
-#         if not area_name:
-#             return jsonify({
-#                 "status": "error",
-#                 "message": "Could not identify the area"
-#             }), 404
-        
-#         historical_summary = get_historical_summary(area_name, year)
-#         if "Error" in historical_summary:
-#             return jsonify({
-#             "status": "error",
-#             "message": str(e)
-#             }), 500
-#         return jsonify({
+#         print(f"Error getting hi
+# #             f"{area_name} histo
 #             "status": "success",
 #             "area": area_name,
 #             "historical_summary": historical_summary,
@@ -223,6 +192,7 @@ from datetime import datetime
 app = Flask(__name__, 
             static_folder='static',
             static_url_path='')
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///forum.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
