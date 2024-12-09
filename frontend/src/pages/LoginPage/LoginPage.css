@@ -2,65 +2,65 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; /* Set minimum height for full viewport */
+  min-height: 80vh;
 }
 
 .login-form {
   border: 2px solid black;
-  background-color: #fff; /* White background for the form */
-  padding: 40px; /* Add some padding for content */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  min-width: 400px; /* Set a fixed width for the form */
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-width: 400px;
   margin-top: 50px;
 }
 
 .form-group {
-  margin-bottom: 15px; /* Space between form groups */
+  margin-bottom: 15px;
 }
 
 .form-group label {
-  display: block; /* Display labels on their own line */
-  margin-bottom: 5px; /* Space between label and input */
-  font-weight: bold; /* Bold text for labels */
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .form-group input {
-  display: block; /* Display inputs on their own line */
-  width: 100%; /* Make inputs full width */
-  padding: 10px; /* Add padding for inputs */
-  border: 1px solid #ccc; /* Light gray border */
-  border-radius: 3px; /* Rounded corners for inputs */
-  font-size: 16px; /* Set font size for inputs */
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
 }
 
 .login-form button {
-  background-color: #000; /* Forest green background for button */
-  color: #fff; /* White text color */
-  padding: 10px 20px; /* Add padding for button content */
-  border: none; /* Remove default button border */
-  border-radius: 5px; /* Rounded corners for button */
-  cursor: pointer; /* Indicate hover interaction */
-  margin-top: 20px; /* Space between button and other elements */
-  width: 100%; /* Make button full width */
-  font-size: 16px; /* Set font size for button text */
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 16px;
   transition: background-color 0.3s ease-in-out;
 }
 
 .login-form button:hover {
-  background-color: #ffa500; /* Darker green on hover */
+  background-color: #ffa500;
 }
 
 .login-form p {
-  margin-top: 20px; /* Space between paragraph and link */
-  text-align: center; /* Center text for signup/signin links */
+  margin-top: 20px;
+  text-align: center;
 }
 
 .login-form a {
-  color: blue; /* Forest green color for links */
-  text-decoration: none; /* Remove underline from links */
+  color: blue;
+  text-decoration: none;
 }
 
 .login-form a:hover {
-  text-decoration: underline; /* Underline links on hover */
+  text-decoration: underline;
 }

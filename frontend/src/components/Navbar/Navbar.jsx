@@ -5,17 +5,22 @@ const Navbar = () => {
   return (
     <header>
       <nav className="bg-black p-4 flex justify-between items-center border-black">
-        <div className="font-bold text-5xl text-white">Histora Xplore</div>
+        {/* Updated logo color to orange */}
+        <div className="font-bold text-5xl text-orange-500">Histora Xplore</div>
         <ul className="flex items-center space-x-4">
+          {/* Added hover effect to the tabs */}
           <li>
-            <Link to="/" className="text-white text-xl font-semibold px-4">
+            <Link
+              to="/"
+              className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
+            >
               Home
             </Link>
           </li>
           <li>
             <Link
               to="/explore"
-              className="text-white text-xl font-semibold px-4"
+              className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
             >
               Explore
             </Link>
@@ -23,7 +28,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/discuss"
-              className="text-white text-xl font-semibold px-4"
+              className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
             >
               Discuss
             </Link>
@@ -31,7 +36,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/about"
-              className="text-white text-xl font-semibold px-4"
+              className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
             >
               About
             </Link>
@@ -39,7 +44,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/contact"
-              className="text-white text-xl font-semibold px-4"
+              className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
             >
               Contact
             </Link>

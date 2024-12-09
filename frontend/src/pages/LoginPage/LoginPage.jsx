@@ -56,7 +56,6 @@ const LoginPage = () => {
         console.log("Login response:", response.data);
         alert(response.data.message); // Display login success/failure message
         // Handle successful login (e.g., redirect to protected page)
-        // ...
       }
     } catch (error) {
       console.error("Error:", error);
