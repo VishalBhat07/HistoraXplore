@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const CreateComment = ({ postId, onCommentAdded }) => {
-  const [content, setContent] = useState('');
-  const [error, setError] = useState('');
+  const [content, setContent] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${postId}/comments`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content }),
-      });
-      
+      const response = await fetch(
+        `http://localhost:3000/api/posts/${postId}/comments`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content }),
+        }
+      );
+
       if (response.ok) {
-        setContent('');
+        setContent("");
         onCommentAdded();
       }
     } catch (err) {
-      setError('Failed to add comment');
+      setError("Failed to add comment");
     }
   };
 
