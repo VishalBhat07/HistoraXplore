@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh; /* Set minimum height for full viewport */
+  min-height: 80vh; /* Set minimum height for full viewport */
 }
 
 .login-form {
@@ -11,7 +11,7 @@
   padding: 40px; /* Add some padding for content */
   border-radius: 5px; /* Rounded corners */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  width: 350px; /* Set a fixed width for the form */
+  min-width: 400px; /* Set a fixed width for the form */
   margin-top: 50px;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .login-form button {
-  background-color: #8bc34a; /* Forest green background for button */
+  background-color: #000; /* Forest green background for button */
   color: #fff; /* White text color */
   padding: 10px 20px; /* Add padding for button content */
   border: none; /* Remove default button border */
@@ -44,19 +44,20 @@
   margin-top: 20px; /* Space between button and other elements */
   width: 100%; /* Make button full width */
   font-size: 16px; /* Set font size for button text */
+  transition: background-color 0.3s ease-in-out;
 }
 
 .login-form button:hover {
-  background-color: #7aa03c; /* Darker green on hover */
+  background-color: #ffa500; /* Darker green on hover */
 }
 
 .login-form p {
-  margin-top: 10px; /* Space between paragraph and link */
+  margin-top: 20px; /* Space between paragraph and link */
   text-align: center; /* Center text for signup/signin links */
 }
 
 .login-form a {
-  color: #8bc34a; /* Forest green color for links */
+  color: blue; /* Forest green color for links */
   text-decoration: none; /* Remove underline from links */
 }
 

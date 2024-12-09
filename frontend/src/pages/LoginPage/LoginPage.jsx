@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.css";
+import { Link } from "react-router-dom";
+import "./LoginPage.css";
 
-const Login = () => {
+const LoginPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,10 +32,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Clear any previous errors
+    setError(null);
 
     try {
-      const apiUrl = "http://localhost:5000"; // Replace with your backend URL
+      const apiUrl = "http://localhost:5000"; // backend URL
       const userData = {
         name: isSignUp ? name : "", // Include name only for signup
         email,
@@ -70,7 +71,6 @@ const Login = () => {
   return (
     <div className="login">
       <form onSubmit={handleSubmit} className="login-form">
-        {error && <p className="error-message">{error}</p>}
         {!isSignUp && (
           <>
             <div className="form-group">
@@ -94,10 +94,11 @@ const Login = () => {
             <button type="submit">Sign In</button>
             <p>
               Not registered?{" "}
-              <a href="#" onClick={handleSignUpClick}>
+              <Link to="/signup" onClick={handleSignUpClick}>
                 Register here
-              </a>
+              </Link>
             </p>
+            {error && <p className="error-message">{error}</p>}
           </>
         )}
         {isSignUp && (
@@ -132,7 +133,7 @@ const Login = () => {
             <button type="submit">Sign Up</button>
             <p>
               Already registered?{" "}
-              <a href="#" onClick={handleSignInClick}>
+              <a href="/login" onClick={handleSignInClick}>
                 Sign in here
               </a>
             </p>
@@ -143,4 +144,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

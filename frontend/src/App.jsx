@@ -7,20 +7,23 @@ import Explore from "./pages/Explore/Explore";
 import Discuss from "./pages/Discuss/Discuss";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import LoginPage from "./pages/LoginPage/LoginPage";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   return (
     <>
-        <Navbar />
-        <Routes>
-          <Route path={"/"} element={<Hero />} />
-          <Route path={"/explore"} element={<Explore />} />
-          <Route path={"/discuss"} element={<Discuss />} />
-          <Route path={"/about"} element={<About />} />
-          <Route path={"/contact"} element={<Contact />} />
-        </Routes>
-        <Footer />
+      <Navbar />
+      <Routes>
+        <Route path={"/"} element={<Hero />} />
+        <Route path={"/explore"} element={<Explore />} />
+        <Route path={"/discuss"} element={<Discuss />} />
+        <Route path={"/about"} element={<About />} />
+        <Route path={"/contact"} element={<Contact />} />
+        <Route path={"/login"} element={<LoginPage />} />
+        <Route path={"/signup"} element={<LoginPage />} />
+      </Routes>
+      <Footer />
     </>
   );
 }
