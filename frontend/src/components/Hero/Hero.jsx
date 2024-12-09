@@ -6,7 +6,6 @@ function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  // Function to handle API call
   const handleSearch = async () => {
     console.log(searchQuery);
     if (!searchQuery.trim()) {
@@ -15,7 +14,7 @@ function HeroSection() {
     }
     try {
       const response = await fetch("https://example.com/api/search", {
-        method: "POST", // Change to GET if required by your API
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -23,21 +22,23 @@ function HeroSection() {
       });
       const data = await response.json();
       console.log("Search Results:", data);
-      // Handle the API response (e.g., display results)
     } catch (error) {
       console.error("Error during API call:", error);
     }
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-orange-500 to-[#1c1c1c]">
+    <section className="min-h-screen bg-gradient-to-b from-orange-400 via-blue-100 to-orange-400">
       <div className="section-container min-h-screen flex flex-col md:flex-row gap-10 items-center justify-center">
-        <div className="left-section text-white text-center md:text-left p-8 md:p-20">
+        <div className="left-section text-gray-800 text-center md:text-left p-8 md:p-20">
           <h1 className="text-3xl md:text-5xl font-bold mb-6">
             Journey Through Time: Discover the Stories That Shaped Us.
           </h1>
           <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <button className="bg-orange-600 hover:bg-orange-700 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all">
+            <button
+              onClick={() => navigate("/explore")}
+              className="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all"
+            >
               Get Started
             </button>
             <button
@@ -51,7 +52,7 @@ function HeroSection() {
             <input
               type="text"
               placeholder="Start exploring ..."
-              className="text-slate-950 w-full p-4 text-lg border-2 border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-lg"
+              className="text-gray-800 w-full p-4 text-lg border-2 border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
