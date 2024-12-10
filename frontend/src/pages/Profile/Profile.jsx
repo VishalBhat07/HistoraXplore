@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../firebaseConfig";
+import { auth } from "../../../firebaseFunctions/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import heroImage from "../../assets/history.jpeg"; // Assuming you still want the background image
