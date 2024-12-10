@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import historyImage from "../../assets/history.jpeg";
+import { useNavigate } from "react-router-dom";
 
 function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   // Function to handle API call
   const handleSearch = async () => {
@@ -38,7 +40,7 @@ function HeroSection() {
             <button className="bg-orange-600 hover:bg-orange-700 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all">
               Get Started
             </button>
-            <button className="bg-gray-700 hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all">
+            <button onClick={()=> navigate("/login")} className="bg-gray-700 hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all">
               Login
             </button>
           </div>

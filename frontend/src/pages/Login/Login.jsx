@@ -42,9 +42,14 @@ const Login = () => {
       };
 
       if (isSignUp) {
-        const response = await axios.post(`${apiUrl}/register`, userData);
-        console.log("Signup response:", response.data);
-        alert(response.data.message); // Display success message
+        const response = await fetch(`${apiUrl}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        });
+        const data=await response.json()
+        console.log("Signup response:",data);
+        alert(response.ok ? "Succesfully Signed up":"Sign Up Failed"); // Display success message
 
         // Clear the form after successful signup
         setName("");
@@ -52,8 +57,8 @@ const Login = () => {
         setPassword("");
       } else {
         const response = await axios.post(`${apiUrl}/login`, userData);
-        console.log("Login response:", response.data);
-        alert(response.data.message); // Display login success/failure message
+        console.log("Login response:", response.json);
+        alert(response?.data?.message); // Display login success/failure message
         // Handle successful login (e.g., redirect to protected page)
         // ...
       }

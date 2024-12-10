@@ -192,6 +192,7 @@ from geopy.geocoders import Nominatim
 import wikipediaapi
 from transformers import pipeline
 import re,os
+import hashlib
 app = Flask(__name__, 
             static_folder='static',
             static_url_path='')
@@ -277,8 +278,22 @@ def get_historical_summary(area_name, year):
             "message": str(e)
         }), 500
 # Models
+class Login(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    usrnme=db.Column(db.String(50),nullable=False)
+    pswd=db.Column(db.String(100),nullable=False)
+    email=db.Column(db.String(100),nullable=False)
+    def to_dict(self):
+        return{
+            'id':self.id,
+            'user':self.usrnme,
+            'pswd':self.pswd,
+            'email':self.email,
+            
+        }
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user=db.Column(db.String(100),nullable=False)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -288,6 +303,7 @@ class Post(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'user':self.user,
             'title': self.title,
             'content': self.content,
             'created_at': self.created_at.isoformat(),
@@ -304,6 +320,7 @@ class Comment(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'user':self.user,
             'content': self.content,
             'created_at': self.created_at.isoformat(),
             'post_id': self.post_id
@@ -376,6 +393,29 @@ def vote_post(post_id):
     
     db.session.commit()
     return jsonify(post.to_dict())
+@app.route('/register',methods=['POST'])
+def insert_user():
+    #hasher=hashlib.sha256()
+    data=request.get_json()
+    usr=data['name']
+    pswd=data['password']
+    email=data['email']
+    # binpswd=b' '.join(format(x, 'b').zfill(8) for x in bytearray(pswd, 'utf-8'))
+    # hasher.update(binpswd)
+    # pswd=hasher.hexdigest()
+    new_usr=Login(
+        usrnme=usr,
+        pswd=pswd,
+        email=email
+    )
+    db.session.add(new_usr)
+    print("added")
+    db.session.commit()
+    return jsonify(new_usr.to_dict()),200
+@app.route('/login',methods=['POST'])
+def validate():
+    data=request.json()
+    users=Login.query.filter()
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=True)
