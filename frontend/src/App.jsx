@@ -8,6 +8,7 @@ import Discuss from "./pages/Discuss/Discuss";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import Profile from "./pages/Profile/Profile";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path={"/contact"} element={<Contact />} />
         <Route path={"/login"} element={<LoginPage />} />
         <Route path={"/signup"} element={<LoginPage />} />
+        <Route path={"/profile"} element={<Profile />} />
       </Routes>
       <Footer />
     </>
