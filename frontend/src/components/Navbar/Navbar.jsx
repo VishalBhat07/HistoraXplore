@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../../firebaseConfig"; // Import Firebase Auth
+import { auth } from "../../../firebaseFunctions/firebaseConfig"; // Import Firebase Auth
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
