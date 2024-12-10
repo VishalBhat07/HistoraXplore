@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "./Contact.css";
+import heroImage from "../../assets/history.jpeg"; // Use the same background image for consistency
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const [message, setMessage] = useState("");
@@ -26,34 +28,90 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-container">
-      {/* Contact Us Hero Section */}
-      <div className="contact-hero">
-        <h1>Contact Us</h1>
-        <p>
-          Have questions, feedback, or inquiries? Get in touch with us, and we’ll
-          get back to you as soon as possible. Your journey through history is
-          important to us!
-        </p>
-      </div>
-      {/* Contact Form */}
-      <div className="contact-right">
-        <form onSubmit={handleSubmit} name="submit-to-google-sheet">
-          <input type="text" name="Name" placeholder="Your name" required />
-          <input type="text" name="Email" placeholder="Your email" required />
-          <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-          <button type="submit" className="btn btn2" disabled={submitting}>
-            {submitting ? (
-              <span>
-                Submitting... <i className="fas fa-spinner fa-spin"></i>
-              </span>
-            ) : (
-              "Submit"
-            )}
-          </button>
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center"
+      style={{
+        backgroundImage: `url(${heroImage})`,
+      }}
+    >
+      <div className="bg-white bg-opacity-80 p-8 md:p-12 rounded-lg shadow-xl max-w-4xl w-full">
+        <form onSubmit={handleSubmit} name="submit-to-google-sheet" className="space-y-6">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
+            Contact Us
+          </h2>
+          <p className="text-center text-gray-700 mb-6">
+            Have questions, feedback, or inquiries? Get in touch with us, and we’ll get back to you as soon as possible.
+          </p>
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                name="Name"
+                placeholder="Your name"
+                required
+                className="w-full p-3 text-gray-800 border-2 border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                name="Email"
+                placeholder="Your email"
+                required
+                className="w-full p-3 text-gray-800 border-2 border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Message
+              </label>
+              <textarea
+                name="Message"
+                rows="4"
+                placeholder="Your Message"
+                className="w-full p-3 text-gray-800 border-2 border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
+              ></textarea>
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all disabled:bg-gray-400"
+              disabled={submitting}
+            >
+              {submitting ? (
+                <span>
+                  Submitting... <i className="fas fa-spinner fa-spin"></i>
+                </span>
+              ) : (
+                "Submit"
+              )}
+            </button>
+          </div>
         </form>
-        <span id="msg">{message}</span>
+        <span
+          id="msg"
+          className="mt-4 block text-center text-green-500"
+        >
+          {message}
+        </span>
       </div>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 };
