@@ -188,7 +188,10 @@ from flask import Flask, request, jsonify,send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+from geopy.geocoders import Nominatim
+import wikipediaapi
+from transformers import pipeline
+import re,os
 app = Flask(__name__, 
             static_folder='static',
             static_url_path='')
@@ -197,7 +200,82 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///forum.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+def get_area_name(lat, lng):
+    try:
+        geolocator = Nominatim(user_agent="my_app")
+        location = geolocator.reverse(f"{lat}, {lng}")
+        address = location.raw['address']
+        area_parts = []
+        if 'city' in address:
+            area_parts.append(address['city'])
+        if 'state' in address:
+            area_parts.append(address['state'])
+        if 'country' in address:
+            area_parts.append(address['country'])
+        return ', '.join(area_parts[:2]) 
+    except Exception as e:
+            print(f"Error:{e}")
+            raise(e)
+def get_wiki_client():
+    user_agent = "HistoraXplorer/1.0 (https://github.com/VishalBhat07/histora-xplore; sushanthjoshi.cs23@rvce.edu.in)"
+    wiki = wikipediaapi.Wikipedia(
+        user_agent,
+        'en'
+    )
+    return wiki
+def get_historical_summary(area_name, year):
+    try:
+        wiki = get_wiki_client()
+        print("entered history summmary:")
+        search_terms = [
+            f"{area_name} history",
+            f"{area_name} historical events",
+            area_name
+        ]
+        all_content = []
+        for term in search_terms:
+            page = wiki.page(term)
+            if page.exists():
+                content = page.text
+                print(content)
+                paragraphs = content.split('\n\n')
+                year_pattern = rf'\b{year}\b'
+                era_start = max(1200, year - 50) 
+                era_end = min(2024, year + 50)
 
+                for para in paragraphs:
+                    if (re.search(year_pattern, para) or 
+                        any(str(y) in para for y in range(era_start, era_end + 1))):
+                        all_content.append(para)
+        if not all_content:
+            return f"No historical information found for {area_name} around {year}."
+
+        summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+        combined_text = ' '.join(all_content)
+        max_chunk_length = 1024
+        chunks = [combined_text[i:i + max_chunk_length] 
+                 for i in range(0, len(combined_text), max_chunk_length)]
+        
+        summaries = []
+        for chunk in chunks[:3]:
+            summary = summarizer(chunk, max_length=150, min_length=50, do_sample=False)
+            summaries.append(summary[0]['summary_text'])
+        print(' '.join(summaries))
+        return jsonify({
+            "status": "success",
+            "area": area_name,
+            "historical_summaries":'.'.join(summaries),
+            "year": year
+        })
+
+        print(f"Error getting history for{area_name}")
+
+
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
 # Models
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -242,7 +320,13 @@ def serve():
 def get_posts():
     posts = Post.query.order_by(Post.votes.desc()).all()
     return jsonify([post.to_dict() for post in posts])
-
+@app.route('/api/coordinates',methods=['GET'])
+def get_summ():
+    data=request.get_json()
+    lng=data['lng']
+    lat=data['lat']
+    area=get_area_name(lat,lng)
+    get_historical_summary(area,year=200)
 @app.route('/api/posts', methods=['POST'])
 def create_post():
     data = request.get_json()
@@ -294,4 +378,4 @@ def vote_post(post_id):
     return jsonify(post.to_dict())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=3000)
