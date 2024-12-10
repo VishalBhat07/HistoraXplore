@@ -294,4 +294,4 @@ def vote_post(post_id):
     return jsonify(post.to_dict())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=3000)

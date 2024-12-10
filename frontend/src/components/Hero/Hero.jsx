@@ -28,7 +28,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-orange-400 via-blue-100 to-orange-400">
+    <section className="min-h-screen bg-orange-400">
       <div className="section-container min-h-screen flex flex-col md:flex-row gap-10 items-center justify-center">
         <div className="left-section text-gray-800 text-center md:text-left p-8 md:p-20">
           <h1 className="text-3xl md:text-5xl font-bold mb-6">
