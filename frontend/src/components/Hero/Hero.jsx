@@ -28,9 +28,14 @@ function HeroSection() {
   };
 
   return (
-    <section className="min-h-screen bg-orange-400">
-      <div className="section-container min-h-screen flex flex-col md:flex-row gap-10 items-center justify-center">
-        <div className="left-section text-gray-800 text-center md:text-left p-8 md:p-20">
+    <section
+      className="min-h-screen bg-cover bg-center flex items-center justify-center"
+      style={{
+        backgroundImage: `url(${historyImage})`,
+      }}
+    >
+      <div className="bg-white bg-opacity-80 p-8 md:p-20 rounded-lg shadow-xl max-w-5xl w-full">
+        <div className="text-gray-800 text-center md:text-left">
           <h1 className="text-3xl md:text-5xl font-bold mb-6">
             Journey Through Time: Discover the Stories That Shaped Us.
           </h1>
@@ -62,13 +67,6 @@ function HeroSection() {
               </button>
             </span>
           </div>
-        </div>
-        <div className="right-section p-8 md:p-20">
-          <img
-            src={historyImage}
-            alt="History Image"
-            className="rounded-lg shadow-lg w-full md:w-[1500px] h-auto transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110"
-          />
         </div>
       </div>
     </section>
