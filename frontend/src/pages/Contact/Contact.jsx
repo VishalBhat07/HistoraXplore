@@ -40,7 +40,7 @@ const Contact = () => {
             Contact Us
           </h2>
           <p className="text-center text-gray-700 mb-6">
-            Have questions, feedback, or inquiries? Get in touch with us, and we’ll get back to you as soon as possible.
+            Have questions, feedback, or inquiries? Get in touch with us, and we'll get back to you as soon as possible.
           </p>
           <div className="space-y-4">
             <div>

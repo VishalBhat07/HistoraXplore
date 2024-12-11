@@ -10,10 +10,12 @@ function Discuss() {
     async function fetchPosts() {
       try {
         const posted = await getPosts();
-        if (posted){
+        if (posted) {
+          // Sort posts by upvotes in descending order
+          posted.sort((a, b) => b.votes - a.votes);
           setPosts(posted);
         }
-      } catch(error) {
+      } catch (error) {
         console.error("Could not fetch posts", error);
       }
     }
@@ -21,10 +23,25 @@ function Discuss() {
   }, [posts]);
 
   return (
-    <>
-      <AddPost />
-      {posts == null ? null : posts.map((post)=><PostCard postId={post.id}/>)}
-    </>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <div className="max-w-4xl mx-auto">
+        {/* Add Post Section */}
+        <div className="mb-8">
+          <AddPost />
+        </div>
+
+        {/* Posts Section */}
+        <div className="space-y-6">
+          {posts == null ? (
+            <p className="text-center text-gray-600">
+              No posts yet. Be the first to contribute!
+            </p>
+          ) : (
+            posts.map((post) => <PostCard key={post.id} postId={post.id} />)
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

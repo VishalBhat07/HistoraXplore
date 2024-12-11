@@ -22,7 +22,7 @@ const About = () => {
         <div className="section mb-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
           <p className="text-gray-700">
-            At <b>History Explore</b>, our mission is to make learning about
+            At <b>Histora Xplore</b>, our mission is to make learning about
             history interactive, accessible, and engaging for everyone. We aim
             to bring the past to life by providing a platform where users can
             explore historical events, timelines, and cultural milestones in an
