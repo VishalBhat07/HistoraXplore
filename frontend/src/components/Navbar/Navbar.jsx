@@ -40,60 +40,30 @@ const Navbar = () => {
     <>
       <ToastContainer />
       <header>
-        <nav className="bg-black p-4 flex justify-between items-center border-black">
+        <nav className="bg-black p-4 flex justify-between items-center border-black animate-slide-in-down">
           {/* Updated logo color to orange */}
           <div className="font-bold text-5xl text-orange-500">
             Histora Xplore
           </div>
           <ul className="flex items-center space-x-4">
             {/* Navigation Links */}
-            <li>
-              <Link
-                to="/"
-                className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/explore"
-                className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
-              >
-                Explore
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/discuss"
-                className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
-              >
-                Discuss
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
-              >
-                Contact
-              </Link>
-            </li>
+            {["Home", "Explore", "Discuss", "About", "Contact"].map((item) => (
+              <li key={item}>
+                <Link
+                  to={`/${item.toLowerCase()}`}
+                  className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors hover:scale-110 transform duration-200 ease-in-out"
+                >
+                  {item}
+                </Link>
+              </li>
+            ))}
 
             {/* Conditionally Render Login or User Dropdown */}
             {!user ? (
               <li>
                 <Link
                   to="/login"
-                  className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
+                  className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors hover:scale-110 transform duration-200 ease-in-out"
                 >
                   Login
                 </Link>
@@ -109,7 +79,7 @@ const Navbar = () => {
                   <i className="fas fa-chevron-down ml-2"></i>
                 </button>
                 {/* Dropdown Menu */}
-                <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity">
+                <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transform group-hover:translate-y-0 translate-y-2 transition-all duration-300 ease-in-out z-50">
                   <li>
                     <Link
                       to="/profile"
