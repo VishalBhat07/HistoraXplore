@@ -1,0 +1,160 @@
+/* PostCard.css */
+
+/* Styling for the post card container */
+.post-card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Header section with title and username */
+.post-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.post-username {
+  font-size: 1rem;
+  color: #4a5568;
+}
+
+/* Body section with post content */
+.post-card-body {
+  font-size: 1rem;
+  color: #2d3748;
+}
+
+/* Footer section with email and vote buttons */
+.post-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-email {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.vote-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vote-count {
+  font-size: 1rem;
+  color: #2d3748;
+  margin-right: 1rem;
+}
+
+/* Vote button styling */
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: 1px solid #ccc;
+}
+
+.button:hover {
+  background-color: #e2e8f0;
+}
+
+.upvote {
+  background-color: #38a169;
+  color: white;
+}
+
+.downvote {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.upvote:hover {
+  background-color: #2f855a;
+}
+
+.downvote:hover {
+  background-color: #c53030;
+}
+
+/* Styling for the comments section */
+.comments-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment {
+  padding: 0.75rem 1rem;
+  background-color: #f7fafc;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+}
+
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.comment-text {
+  font-size: 1rem;
+  color: #2d3748;
+}
+
+.comment-username {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.comment-votes {
+  font-size: 0.875rem;
+  color: #2d3748;
+}
+
+/* Add Comment Form */
+.add-comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.add-comment-form textarea {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  resize: none;
+}
+
+.add-comment-form .button {
+  align-self: flex-end;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+.add-comment-form .button:hover {
+  background-color: #2b6cb0;
+}
