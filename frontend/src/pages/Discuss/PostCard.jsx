@@ -4,6 +4,7 @@ import { getUserInfo } from "../../../firebaseFunctions/getUserInfo"; // Functio
 
 const PostCard = ({ postId }) => {
   const [post, setPost] = useState(null); // State to store the post data
+  const [comments, setComments] = useState(null);
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(""); // Error state
   const [user, setUser] = useState(null); // State to store user info
@@ -33,6 +34,19 @@ const PostCard = ({ postId }) => {
         console.error("Could not fetch user info", err);
       }
     };
+
+    async function getComments() {
+      if (post) {
+        try {
+          const fetchComments = await post.getComments();
+          console.log(fetchComments);
+        } catch {
+          console.log("Error fetching comments", err);
+        }
+      } else {
+        console.warn("Post is null, cannot fetch comments");
+      }
+    }
 
     fetchPost();
     fetchUser();

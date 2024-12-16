@@ -36,7 +36,6 @@ export class Comment {
   async deleteFromDatabase(postId, commentId) {
     const commentRef = doc(db, "Posts", postId, "comments", commentId);
     await deleteDoc(commentRef);
-    console.log(`Comment ${commentId} deleted from post ${postId}`);
   }
 
   toJSON() {
@@ -72,7 +71,6 @@ export class Post {
   async addComment(newComment) {
     const commentsRef = collection(db, "Posts", this.id, "comments");
     const commentDocRef = await addDoc(commentsRef, newComment.toJSON());
-    console.log("Comment added with ID:", commentDocRef.id);
   }
 
   async updateInDatabase() {
