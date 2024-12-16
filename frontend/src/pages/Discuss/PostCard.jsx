@@ -27,7 +27,17 @@ const PostCard = ({ postId }) => {
       }
     };
 
+    const fetchUser = async() =>{
+      try {
+        const user = await getUserInfo();
+        setUser(user);
+      } catch {
+      } finally {
+      }
+    }
+
     fetchPost();
+    fetchUser();
   }, [postId]);
 
   const toggleComments = async () => {
@@ -35,6 +45,7 @@ const PostCard = ({ postId }) => {
       // Fetch comments only when opening the section
       try {
         const fetchedComments = await post.getCommentObjects();
+        console.log(fetchedComments);
         setComments(fetchedComments);
       } catch (err) {
         setError("Error fetching comments");
@@ -59,7 +70,7 @@ const PostCard = ({ postId }) => {
     e.preventDefault();
     if (!newComment.trim()) return;
 
-    const comment = new Comment(newComment, post.emailId, post.username); // Create a new Comment object
+    const comment = new Comment(newComment, user?.email, user?.displayName); // Create a new Comment object
     await post.addComment(comment); // Add the comment to the database
 
     setComments([...comments, comment]); // Update comments locally
