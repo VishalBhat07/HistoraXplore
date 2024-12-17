@@ -109,7 +109,7 @@ const Navbar = () => {
                   <i className="fas fa-chevron-down ml-2"></i>
                 </button>
                 {/* Dropdown Menu */}
-                <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity">
+                <ul style={{zIndex:"11"}} className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity">
                   <li>
                     <Link
                       to="/profile"

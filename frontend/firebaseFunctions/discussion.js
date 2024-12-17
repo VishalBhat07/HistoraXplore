@@ -145,6 +145,19 @@ export class Post {
   generateId() {
     return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
+
+  static async getUserPosts(userEmail) {
+    const postsRef = collection(db, "Posts"); // Use db
+    const snapshot = await getDocs(postsRef);
+    return snapshot.docs
+      .filter((doc) => doc.data().emailId === userEmail)
+      .map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+  
+  static async deletePost(postId) {
+    const postRef = doc(db, "Posts", postId); // Use db
+    await deleteDoc(postRef);
+  }
 }
 
 export async function getPosts() {
