@@ -9,6 +9,7 @@ import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import Profile from "./pages/Profile/Profile";
+import HistoryPeople from "./pages/HistoryPeople/HistoryPeople";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path={"/login"} element={<LoginPage />} />
         <Route path={"/signup"} element={<LoginPage />} />
         <Route path={"/profile"} element={<Profile />} />
+        <Route path={"/historypeople"} element={<HistoryPeople />} />
       </Routes>
       <Footer />
     </>

@@ -11,32 +11,32 @@ import {
 import { db } from "./firebaseConfig.js";
 
 export class Comment {
-  constructor(text, emailId, username) {
+  constructor(text, emailId, username, id) {
     this.text = text;
     this.votes = 0;
     this.emailId = emailId;
     this.username = username;
+    this.id = id || null;
   }
 
-  async upvote(postId, commentId) {
+  async upvote(commentId) {
     this.votes += 1;
-    await this.updateInDatabase(postId, commentId);
+    await this.updateInDatabase(this.id, commentId);
   }
 
-  async downvote(postId, commentId) {
+  async downvote(commentId) {
     this.votes -= 1;
-    await this.updateInDatabase(postId, commentId);
+    await this.updateInDatabase(this.id, commentId);
   }
 
-  async updateInDatabase(postId, commentId) {
-    const commentRef = doc(db, "Posts", postId, "comments", commentId);
+  async updateInDatabase(commentId) {
+    const commentRef = doc(db, "Posts", this.id, "comments", commentId);
     await updateDoc(commentRef, { votes: this.votes });
   }
 
-  async deleteFromDatabase(postId, commentId) {
-    const commentRef = doc(db, "Posts", postId, "comments", commentId);
+  async deleteFromDatabase(commentId) {
+    const commentRef = doc(db, "Posts", this.id, "comments", commentId);
     await deleteDoc(commentRef);
-    console.log(`Comment ${commentId} deleted from post ${postId}`);
   }
 
   toJSON() {
@@ -72,7 +72,6 @@ export class Post {
   async addComment(newComment) {
     const commentsRef = collection(db, "Posts", this.id, "comments");
     const commentDocRef = await addDoc(commentsRef, newComment.toJSON());
-    console.log("Comment added with ID:", commentDocRef.id);
   }
 
   async updateInDatabase() {
@@ -111,6 +110,14 @@ export class Post {
     return commentsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 
+  async getCommentObjects() {
+    const getCommentsJSON = await this.getComments();
+    return getCommentsJSON.map((json) => {
+      const commentObject = new Comment(json["text"], json["emailId"], json["username"], json["id"]);
+      return commentObject;
+    });
+  }
+
   static async getPost(postId) {
     const postRef = doc(db, "Posts", postId);
     const postSnapshot = await getDoc(postRef);
@@ -137,6 +144,19 @@ export class Post {
 
   generateId() {
     return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  static async getUserPosts(userEmail) {
+    const postsRef = collection(db, "Posts"); // Use db
+    const snapshot = await getDocs(postsRef);
+    return snapshot.docs
+      .filter((doc) => doc.data().emailId === userEmail)
+      .map((doc) => ({ id: doc.id, ...doc.data() }));
+  }
+  
+  static async deletePost(postId) {
+    const postRef = doc(db, "Posts", postId); // Use db
+    await deleteDoc(postRef);
   }
 }
 

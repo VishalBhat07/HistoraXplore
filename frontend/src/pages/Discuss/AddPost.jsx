@@ -40,19 +40,19 @@ const AddPost = () => {
   };
 
   return (
-    <div className="p-6 bg-white-100 rounded-lg shadow-md">
+    <div className="p-6 bg-white bg-opacity-80 backdrop-blur-lg rounded-lg shadow-lg">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Create a Post</h2>
+        <h2 className="text-2xl font-bold text-gray-800">Create a Post</h2>
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+          className="px-4 py-2 text-lg font-semibold bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600 focus:ring focus:ring-orange-300 transition"
           onClick={toggleFormVisibility}
         >
-          {isFormVisible ? "-" : "+"}
+          {isFormVisible ? "Close" : "New Post"}
         </button>
       </div>
 
       {isFormVisible && (
-        <form className="space-y-4" onSubmit={handlePostSubmit}>
+        <form className="space-y-6" onSubmit={handlePostSubmit}>
           <div>
             <label
               htmlFor="post-title"
@@ -63,7 +63,7 @@ const AddPost = () => {
             <input
               type="text"
               id="post-title"
-              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -79,7 +79,7 @@ const AddPost = () => {
             </label>
             <textarea
               id="post-text"
-              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400"
               value={text}
               onChange={(e) => setText(e.target.value)}
               required
@@ -90,10 +90,10 @@ const AddPost = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full px-4 py-2 text-white rounded-lg ${
+              className={`w-full px-4 py-2 text-white rounded-lg shadow-lg ${
                 loading
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-green-500 hover:bg-green-600 transition"
+                  : "bg-orange-500 hover:bg-orange-600 transition"
               }`}
             >
               {loading ? "Publishing..." : "Publish Post"}
