@@ -93,7 +93,7 @@ const HeroSection = () => {
               animate-fade-in-up delay-200"
             >
               <button
-                onClick={() => navigate("/explore")}
+                onClick={() => navigate("/historypeople")}
                 className="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md 
                 transition-all duration-300 hover:scale-105 active:scale-95"
               >
