@@ -9,7 +9,6 @@ import historyImage6 from "../../assets/history5.jpeg";
 import historyImage7 from "../../assets/history6.jpg";
 
 const HeroSection = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [currentImage, setCurrentImage] = useState(0);
   const navigate = useNavigate();
 
@@ -30,28 +29,8 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSearch = async () => {
-    if (!searchQuery.trim()) {
-      alert("Type something first !!");
-      return;
-    }
-    try {
-      const response = await fetch("https://example.com/api/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query: searchQuery }),
-      });
-      const data = await response.json();
-      console.log("Search Results:", data);
-    } catch (error) {
-      console.error("Error during API call:", error);
-    }
-  };
-
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative h-screen overflow-hidden">
       {/* Animated Gradient Background */}
       <div
         className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
@@ -78,58 +57,43 @@ const HeroSection = () => {
       </div>
 
       {/* Content Overlay */}
-      <div className="relative z-20 min-h-screen flex items-center justify-center">
-        <div className="bg-white bg-opacity-70 p-8 md:p-20 rounded-lg shadow-xl max-w-5xl w-full">
-          <div className="text-gray-800 text-center md:text-left">
-            <h1
-              className="text-3xl md:text-5xl font-bold mb-6 
-              animate-fade-in-down"
-            >
-              Journey Through Time: Discover the Stories That Shaped Us.
-            </h1>
+      <div className="relative z-20 h-full flex items-center justify-center px-4">
+        <div className="bg-white bg-opacity-80 p-8 rounded-xl shadow-2xl text-center max-w-2xl w-full">
+          <h1
+            className="text-4xl font-bold mb-8 text-gray-900 
+            animate-fade-in-down"
+          >
+            Uncover the Threads of History
+          </h1>
 
-            <div
-              className="flex flex-col md:flex-row gap-4 mb-6 
-              animate-fade-in-up delay-200"
-            >
-              <button
-                onClick={() => navigate("/historypeople")}
-                className="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md 
-                transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                Get Started
-              </button>
-              <button
-                onClick={() => navigate("/login")}
-                className="bg-gray-700 hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md 
-                transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                Login
-              </button>
-            </div>
+          <p
+            className="text-xl text-gray-700 mb-10 
+            animate-fade-in-up delay-200"
+          >
+            Embark on a journey through time, exploring the stories, people, and
+            moments that have shaped our world.
+          </p>
 
-            <div
-              className="relative w-full md:w-120 
-              animate-fade-in-up delay-400"
+          <div
+            className="flex justify-center space-x-4 
+            animate-fade-in-up delay-400"
+          >
+            <button
+              onClick={() => navigate("/historypeople")}
+              className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold 
+              py-3 px-8 rounded-lg shadow-md transition-all duration-300 
+              hover:scale-105 active:scale-95"
             >
-              <input
-                type="text"
-                placeholder="Start exploring ..."
-                className="text-gray-800 w-full p-4 text-lg border-2 border-blue-300 rounded-md 
-                focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg 
-                transition-all duration-300"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <span className="absolute inset-y-0 right-4 flex items-center text-gray-500">
-                <button
-                  onClick={handleSearch}
-                  className="hover:scale-110 transition-transform duration-300"
-                >
-                  <i className="fas fa-search"></i>
-                </button>
-              </span>
-            </div>
+              Explore History
+            </button>
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-gray-700 hover:bg-gray-800 text-white text-lg font-semibold 
+              py-3 px-8 rounded-lg shadow-md transition-all duration-300 
+              hover:scale-105 active:scale-95"
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>
