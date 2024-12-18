@@ -9,6 +9,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import heroImage from "../../assets/history.jpeg"; // Use the same background image for consistency
+import { motion } from "framer-motion"; // Import framer-motion
 
 const LoginPage = () => {
   const [name, setName] = useState("");
@@ -66,19 +67,34 @@ const LoginPage = () => {
   };
 
   return (
-    <div
+    <motion.div
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage: `url(${heroImage})`,
       }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <div className="bg-white bg-opacity-80 p-8 md:p-20 rounded-lg shadow-xl max-w-md w-full">
+      <motion.div
+        className="bg-white bg-opacity-80 p-8 md:p-20 rounded-lg shadow-xl max-w-md w-full"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.8 }}
+        transition={{ duration: 0.5 }}
+      >
         <form onSubmit={handleSubmit} className="space-y-6">
           {!isSignUp ? (
             <>
-              <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+              <motion.h2
+                className="text-3xl font-bold text-center text-gray-800 mb-6"
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
                 Welcome Back
-              </h2>
+              </motion.h2>
               <div className="space-y-4">
                 <div>
                   <label
@@ -115,12 +131,15 @@ const LoginPage = () => {
                   />
                 </div>
               </div>
-              <button
+              <motion.button
                 type="submit"
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
               >
                 Sign In
-              </button>
+              </motion.button>
               <p className="text-center text-gray-700 mt-4">
                 Not registered?{" "}
                 <button
@@ -133,9 +152,14 @@ const LoginPage = () => {
             </>
           ) : (
             <>
-              <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+              <motion.h2
+                className="text-3xl font-bold text-center text-gray-800 mb-6"
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
                 Create an Account
-              </h2>
+              </motion.h2>
               <div className="space-y-4">
                 <div>
                   <label
@@ -189,12 +213,15 @@ const LoginPage = () => {
                   />
                 </div>
               </div>
-              <button
+              <motion.button
                 type="submit"
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
               >
                 Sign Up
-              </button>
+              </motion.button>
               <p className="text-center text-gray-700 mt-4">
                 Already registered?{" "}
                 <button
@@ -208,8 +235,8 @@ const LoginPage = () => {
           )}
         </form>
         <ToastContainer position="top-center" autoClose={3000} />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

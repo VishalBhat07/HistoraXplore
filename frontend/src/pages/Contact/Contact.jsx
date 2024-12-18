@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import heroImage from "../../assets/history.jpeg"; // Use the same background image for consistency
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 
 const Contact = () => {
   const [message, setMessage] = useState("");
@@ -34,16 +35,44 @@ const Contact = () => {
         backgroundImage: `url(${heroImage})`,
       }}
     >
-      <div className="bg-white bg-opacity-80 p-8 md:p-12 rounded-lg shadow-xl max-w-4xl w-full">
-        <form onSubmit={handleSubmit} name="submit-to-google-sheet" className="space-y-6">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
+      {/* Animated Form Container */}
+      <motion.div
+        className="bg-white bg-opacity-80 p-8 md:p-12 rounded-lg shadow-xl max-w-4xl w-full"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.form
+          onSubmit={handleSubmit}
+          name="submit-to-google-sheet"
+          className="space-y-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          <motion.h2
+            className="text-3xl font-bold text-center text-gray-800 mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             Contact Us
-          </h2>
-          <p className="text-center text-gray-700 mb-6">
-            Have questions, feedback, or inquiries? Get in touch with us, and we'll get back to you as soon as possible.
-          </p>
+          </motion.h2>
+          <motion.p
+            className="text-center text-gray-700 mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            Have questions, feedback, or inquiries? Get in touch with us, and
+            we'll get back to you as soon as possible.
+          </motion.p>
           <div className="space-y-4">
-            <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+            >
               <label
                 htmlFor="name"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -57,8 +86,12 @@ const Contact = () => {
                 required
                 className="w-full p-3 text-gray-800 border-2 border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
               />
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.8 }}
+            >
               <label
                 htmlFor="email"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -72,8 +105,12 @@ const Contact = () => {
                 required
                 className="w-full p-3 text-gray-800 border-2 border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
               />
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1 }}
+            >
               <label
                 htmlFor="message"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -86,13 +123,16 @@ const Contact = () => {
                 placeholder="Your Message"
                 className="w-full p-3 text-gray-800 border-2 border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
               ></textarea>
-            </div>
+            </motion.div>
           </div>
           <div>
-            <button
+            <motion.button
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-md shadow-md transition-all disabled:bg-gray-400"
               disabled={submitting}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.2 }}
             >
               {submitting ? (
                 <span>
@@ -101,16 +141,19 @@ const Contact = () => {
               ) : (
                 "Submit"
               )}
-            </button>
+            </motion.button>
           </div>
-        </form>
-        <span
+        </motion.form>
+        <motion.span
           id="msg"
           className="mt-4 block text-center text-green-500"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: message ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
         >
           {message}
-        </span>
-      </div>
+        </motion.span>
+      </motion.div>
       <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
