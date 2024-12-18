@@ -50,13 +50,14 @@ export class Comment {
 }
 
 export class Post {
-  constructor(title, text, emailId, username, id = null, votes = 0) {
+  constructor(title, text, emailId, username, keywords, id = null, votes = 0) {
     this.title = title;
     this.text = text;
     this.votes = votes;
     this.emailId = emailId;
     this.username = username;
     this.id = id || this.generateId();
+    this.keywords = keywords || null;
   }
 
   async upvote() {
@@ -84,6 +85,7 @@ export class Post {
         votes: this.votes,
         emailId: this.emailId,
         username: this.username,
+        keywords: this.keywords,
       },
       { merge: true }
     );
@@ -136,8 +138,9 @@ export class Post {
       postData.text,
       postData.emailId,
       postData.username,
+      postData.keywords,
       postId,
-      postData.votes
+      postData.votes,
     );
     return post;
   }
