@@ -68,7 +68,7 @@ const Navbar = () => {
                 to="/historypeople"
                 className="text-white text-xl font-semibold px-4 hover:text-orange-500 transition-colors"
               >
-                Trending
+                Today in History
               </Link>
             </li>
             <li>

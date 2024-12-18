@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion"; // Import Framer Motion
 import AddPost from "./AddPost";
 import PostCard from "./PostCard";
 import { getPosts } from "../../../firebaseFunctions/discussion";
@@ -20,33 +21,73 @@ function Discuss() {
       }
     }
     fetchPosts();
-  }, [posts]);
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.2,
+        when: "beforeChildren",
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5 },
+    },
+  };
 
   return (
-    <div
-      className="min-h-screen p-6"
-      style={{
-        background: "linear-gradient(to bottom right, #ff7e5f, #feb47b)",
-      }}
+    <motion.div
+      className="min-h-screen p-6 bg-gradient-to-br from-indigo-50 to-purple-200"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
     >
       <div className="max-w-4xl mx-auto">
         {/* Add Post Section */}
-        <div className="mb-8">
+        <motion.div
+          className="mb-8"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
           <AddPost />
-        </div>
+        </motion.div>
 
         {/* Posts Section */}
-        <div className="space-y-6">
+        <motion.div
+          className="space-y-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {posts == null ? (
-            <p className="text-center text-gray-600">
+            <motion.p
+              className="text-center text-gray-600"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
               No posts yet. Be the first to contribute!
-            </p>
+            </motion.p>
           ) : (
-            posts.map((post) => <PostCard key={post.id} postId={post.id} />)
+            posts.map((post) => (
+              <motion.div key={post.id} variants={cardVariants}>
+                <PostCard postId={post.id} />
+              </motion.div>
+            ))
           )}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -75,7 +75,7 @@ const MapComponent = ({ height, width, output }) => {
           document.head.appendChild(spinnerStyle);
 
           // Fetch data from the backend
-          const response = await fetch("http://localhost:5000/api/coordinates", {
+          const response = await fetch("http://localhost:3000/api/coordinates", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebaseFunctions/firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -125,8 +126,12 @@ const Profile = () => {
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return activities.map((activity, index) => (
-      <div
+      <motion.div
         key={index}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.3 }}
         className="bg-white p-4 rounded-lg shadow-md mb-4 flex justify-between items-start hover:shadow-lg transition duration-200"
       >
         <div className="flex flex-col">
@@ -145,53 +150,91 @@ const Profile = () => {
 
         <div className="flex flex-col items-end">
           {activity.type === "post" ? (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => handleDeletePost(activity.id)}
               className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm mb-2 transition duration-150"
             >
-              Delete Post
-            </button>
+              <i className="fa fa-trash"></i>
+            </motion.button>
           ) : (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => handleDeleteComment(activity.postId, activity.id)}
               className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm mb-2 transition duration-150"
             >
-              Delete Comment
-            </button>
+              <i className="fa fa-trash"></i>
+            </motion.button>
           )}
         </div>
-      </div>
+      </motion.div>
     ));
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center p-4">
-        <div className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden grid grid-cols-3 gap-6 p-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center p-4"
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden grid grid-cols-3 gap-6 p-8"
+        >
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-800">
+            <motion.h2
+              animate={{
+                scale: [1, 1.1, 1],
+                transition: {
+                  repeat: Infinity,
+                  duration: 1,
+                },
+              }}
+              className="text-2xl font-bold text-gray-800"
+            >
               Loading profile...
-            </h2>
+            </motion.h2>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     );
   }
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage: `url(${heroImage})`,
       }}
     >
-      <div className="bg-white w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden grid grid-cols-3 gap-6 p-8">
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden grid grid-cols-3 gap-6 p-8"
+      >
         {/* Profile Overview Column */}
-        <div className="col-span-1 flex flex-col items-center justify-center space-y-6 border-r pr-6">
-          <div className="relative">
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="col-span-1 flex flex-col items-center justify-center space-y-6 border-r pr-6"
+        >
+          <motion.div whileHover={{ scale: 1.05 }} className="relative">
             <div className="w-40 h-40 rounded-full border-4 border-blue-500 overflow-hidden shadow-lg">
               {user.photoURL ? (
-                <img
+                <motion.img
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
                   src={user.photoURL}
                   alt="Profile"
                   className="w-full h-full object-cover"
@@ -201,35 +244,58 @@ const Profile = () => {
                   <i className="fa fa-user-circle w-24 h-24 text-blue-400"></i>
                 </div>
               )}
-              <div
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="absolute bottom-0 right-0 bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center cursor-pointer"
                 onClick={handleEditProfile}
               >
                 <i className="fa fa-edit w-5 h-5"></i>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-800">
+            <motion.h2
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="text-2xl font-bold text-gray-800"
+            >
               {user.displayName}
-            </h2>
-            <p className="text-gray-600 mt-2">{user.email}</p>
+            </motion.h2>
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-gray-600 mt-2"
+            >
+              {user.email}
+            </motion.p>
           </div>
 
-          <div className="w-full bg-gray-200 rounded-full h-2.5">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${user.profileCompleteness || 85}%` }}
+            transition={{ duration: 0.5 }}
+            className="w-full bg-gray-200 rounded-full h-2.5"
+          >
             <div
               className="bg-blue-600 h-2.5 rounded-full"
               style={{ width: `${user.profileCompleteness || 85}%` }}
             ></div>
-          </div>
+          </motion.div>
           <p className="text-sm text-gray-600">
             Profile Completeness: {user.profileCompleteness || 85}%
           </p>
-        </div>
+        </motion.div>
 
         {/* Profile Details Column */}
-        <div className="col-span-1 space-y-6 border-r px-6">
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="col-span-1 space-y-6 border-r px-6"
+        >
           <h3 className="text-xl font-semibold text-gray-800 border-b pb-3 flex items-center">
             <i className="fa fa-user mr-3 text-blue-500"></i> Personal
             Information
@@ -265,38 +331,47 @@ const Profile = () => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Recent Activity and Actions Column */}
-        <div className="col-span-1 space-y-6">
+        <motion.div
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="col-span-1 space-y-6"
+        >
           <h3 className="text-xl font-semibold text-gray-800 border-b pb-3">
             Recent Activity
           </h3>
 
           <div className="max-h-96 overflow-y-auto">
-            {renderRecentActivities()}
+            <AnimatePresence>{renderRecentActivities()}</AnimatePresence>
           </div>
 
           <div className="mt-6 space-y-4">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleEditProfile}
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg transition flex items-center justify-center"
             >
               <i className="fa fa-edit mr-2"></i> Edit Profile
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleSignOut}
               className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg transition flex items-center justify-center"
             >
               <i className="fa fa-sign-out mr-2"></i> Sign Out
-            </button>
+            </motion.button>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <ToastContainer position="top-right" autoClose={5000} />
-    </div>
+    </motion.div>
   );
 };
 

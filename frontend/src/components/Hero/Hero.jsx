@@ -1,102 +1,84 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
-// Import your images
-import historyImage3 from "../../assets/history.jpeg";
-import historyImage4 from "../../assets/history3.jpg";
-import historyImage5 from "../../assets/history4.jpg";
-import historyImage6 from "../../assets/history5.jpeg";
-import historyImage7 from "../../assets/history6.jpg";
+import { motion } from "framer-motion";
+import { FaHistory, FaCompass, FaBook } from "react-icons/fa";
 
 const HeroSection = () => {
-  const [currentImage, setCurrentImage] = useState(0);
   const navigate = useNavigate();
 
-  const images = [
-    historyImage3,
-    historyImage4,
-    historyImage5,
-    historyImage6,
-    historyImage7,
-  ];
-
-  // Automatic image change
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000); // Change image every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="relative h-screen overflow-hidden">
-      {/* Animated Gradient Background */}
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
-        animate-gradient-x opacity-50"
-      />
+    <div className="relative flex flex-col items-center justify-center h-screen bg-gradient-to-br from-indigo-50 to-purple-100">
+      {/* Animated Title */}
+      <motion.h1
+        className="text-5xl font-bold text-gray-900 mb-4"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        Welcome to Histora Xplorer
+      </motion.h1>
 
-      {/* Image Carousel with Tailwind Animations */}
-      <div className="absolute inset-0">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out 
-            ${
-              currentImage === index
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-105"
-            }`}
-            style={{
-              backgroundImage: `url(${image})`,
-              zIndex: currentImage === index ? 10 : 0,
-            }}
-          />
-        ))}
-      </div>
+      {/* Subtitle */}
+      <motion.p
+        className="text-lg text-gray-700 text-center max-w-3xl mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
+        Dive into the past and uncover the stories that shaped our present.
+        Discover, learn, and connect with the threads of history.
+      </motion.p>
 
-      {/* Content Overlay */}
-      <div className="relative z-20 h-full flex items-center justify-center px-4">
-        <div className="bg-white bg-opacity-80 p-8 rounded-xl shadow-2xl text-center max-w-2xl w-full">
-          <h1
-            className="text-4xl font-bold mb-8 text-gray-900 
-            animate-fade-in-down"
-          >
-            Uncover the Threads of History
-          </h1>
+      {/* Buttons */}
+      <motion.div
+        className="flex space-x-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.6 }}
+      >
+        <button
+          onClick={() => navigate("/historypeople")}
+          className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105 active:scale-95"
+        >
+          Explore History
+        </button>
+        <button
+          onClick={() => navigate("/login")}
+          className="bg-gray-700 hover:bg-gray-800 text-white text-lg font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105 active:scale-95"
+        >
+          Login
+        </button>
+      </motion.div>
 
-          <p
-            className="text-xl text-gray-700 mb-10 
-            animate-fade-in-up delay-200"
-          >
-            Embark on a journey through time, exploring the stories, people, and
-            moments that have shaped our world.
-          </p>
-
-          <div
-            className="flex justify-center space-x-4 
-            animate-fade-in-up delay-400"
-          >
-            <button
-              onClick={() => navigate("/historypeople")}
-              className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold 
-              py-3 px-8 rounded-lg shadow-md transition-all duration-300 
-              hover:scale-105 active:scale-95"
-            >
-              Explore History
-            </button>
-            <button
-              onClick={() => navigate("/login")}
-              className="bg-gray-700 hover:bg-gray-800 text-white text-lg font-semibold 
-              py-3 px-8 rounded-lg shadow-md transition-all duration-300 
-              hover:scale-105 active:scale-95"
-            >
-              Login
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Dynamic Icons */}
+      <motion.div
+        className="flex space-x-8 mt-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.9 }}
+      >
+        <motion.div
+          className="text-blue-500 text-6xl"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <FaHistory />
+        </motion.div>
+        <motion.div
+          className="text-purple-500 text-6xl"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 2, delay: 0.2 }}
+        >
+          <FaCompass />
+        </motion.div>
+        <motion.div
+          className="text-pink-500 text-6xl"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 2, delay: 0.4 }}
+        >
+          <FaBook />
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
