@@ -2,16 +2,16 @@ from flask import Flask, request, jsonify,send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from groq import Groq
 from geopy.geocoders import Nominatim
-import wikipediaapi
+import wikipediaapi,os
 from transformers import pipeline
 import re,bs4,requests,wikipedia
 app = Flask(__name__, 
             static_folder='static',
             static_url_path='')
 CORS(app)
-
-
+os.environ['GROQ_API_KEY']="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"
 class HistoricalContentFetcher:
     def __init__(self):
         self.apis = {
@@ -43,9 +43,9 @@ class HistoricalContentFetcher:
                 area_parts.append(address['state'])
             if 'country' in address:
                 area_parts.append(address['country'])
-            return area_parts[0]
+            return area_parts    
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Error area: {e}")
             raise e
 
     def scrape_unesco_content(self, area_name, year):
@@ -60,8 +60,6 @@ class HistoricalContentFetcher:
                 soup = bs4.BeautifulSoup(response.text, 'html.parser')
                 content_blocks = soup.find_all(['p', 'div'], string=lambda text: area_name in text and str(year) in text)
                 historical_content = [block.get_text(strip=True) for block in content_blocks]
-                print(historical_content)
-                print(type(historical_content))
                 return ' '.join(historical_content)
             return ""
         except Exception as e:
@@ -70,27 +68,36 @@ class HistoricalContentFetcher:
 
     def fetch_wikipedia_content(self, area_name, year):
         try:
-            user_agent = "HistoriaXplore/1.0 (https://github.com/VishalBhat07/histora-xplore; sushanthjoshi.cs23@rvce.edu.in)"
+            user_agent = "Histora/1.0 (https://github.com/VishalBhat07/histora-xplore; vishalkbhat.cs23@rvce.edu.in)"
             wiki = wikipediaapi.Wikipedia(user_agent, 'en')
-            search_items = wikipedia.search(f"{area_name} history", results=1)
+            print(area_name[0])
+            # Modify the search to be more specific to the area and year
+            search_query = f"{area_name[0]} history"
+            search_items = wikipedia.search(search_query, results=1)
+            
+            if not search_items:
+                return "No relevant historical information found"
+            
             wiki_page = wiki.page(search_items[0])
-
             if not wiki_page.exists():
                 return ""
-
+            
             all_content = []
             content = wiki_page.text
             paragraphs = content.split('\n\n')
-            year_pattern = rf'\b{year}\b'
-            era_start = max(1200, year - 50)
-            era_end = min(2024, year + 50)
-
+            year_range = list(range(year - 20, year + 21))
+            
             for para in paragraphs:
-                if (re.search(year_pattern, para) or
-                    any(str(y) in para for y in range(era_start, era_end + 1))):
+                if (any(str(y) in para for y in year_range) and 
+                    area_name[0].lower() in para.lower()):
                     all_content.append(para)
-            #print(all_content)
+            
+            if not all_content:
+                return "No relevant history found for the specified area and year range"
+            print(all_content)
             return ' '.join(all_content)
+
+
         except Exception as e:
             print(f"Wikipedia content fetch error: {e}")
             return ""
@@ -141,28 +148,33 @@ class HistoricalContentFetcher:
 
     def get_historical_summary(self, lat, lng, year):
         try:
-            # cache_key = f"{lat}_{lng}_{year}"
-            # if cache_key in self.cache:
-            #     return self.cache[cache_key]
+                self.model = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+                # cache_key = f"{lat}_{lng}_{year}"
+                # if cache_key in self.cache:
+                #     return self.cache[cache_key]
 
-            area_name = self.get_area_name(lat, lng)
-            wikipedia_content = self.fetch_wikipedia_content(area_name, year)
-            unesco_content = self.scrape_unesco_content(area_name, year)
-            open_library_book_links = self.get_open_library_book_links(area_name, year)
-            gutenberg_book_links = self.get_project_gutenberg_book_links(area_name, year)
+                area_name = self.get_area_name(lat, lng)
+                wikipedia_content = self.fetch_wikipedia_content(area_name, year)
+                unesco_content = self.scrape_unesco_content(area_name, year)
+                open_library_book_links = self.get_open_library_book_links(area_name, year)
+        except Exception as e:
+                print(f"Error init_summ: {e}")
+                return "An error occurred while fetching historical information."
+            #gutenberg_book_links = self.get_project_gutenberg_book_links(area_name, year)
+        try:
 
             historical_sources = [
                 wikipedia_content,
                 unesco_content
-            ]
+            ]   
             historical_sources = [source for source in historical_sources if source]
             book_links = {
                 "Open_Library": open_library_book_links,
-                "Project_Gutenberg": gutenberg_book_links
+                #"Project_Gutenberg": gutenberg_book_links
             }
             if not historical_sources and not book_links:
                 return "No historical information found."
-            summaries = self.summarize_content(historical_sources)
+            summaries = self.summarize_content(wikipedia_content)
             # self.cache[cache_key] = {
             #     "summaries": summaries,
             #     "book_links": book_links
@@ -172,19 +184,40 @@ class HistoricalContentFetcher:
                 "book_links": book_links
             }
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Error hist_summ: {e}")
             return "An error occurred while fetching historical information."
 
     def summarize_content(self, historical_sources):
-        combined_text = ' '.join(historical_sources)
-        max_chunk_length = 1024
-        chunks = [combined_text[i:i + max_chunk_length] for i in range(0, len(combined_text), max_chunk_length)]
-        summaries = []
-        for chunk in chunks[:3]:
-            summary = self.summarizer(chunk, max_length=150, min_length=50, do_sample=False)
-            summaries.append(summary[0]['summary_text'])
-        return ' '.join(summaries)
-
+        try:
+            # Ensure historical_sources is a string
+            if not isinstance(historical_sources, str):
+                historical_sources = str(historical_sources)
+            historical_sources=historical_sources[:6000]
+            summary = self.model.chat.completions.create(
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are a helpful summarizer whose job is to make history interesting and provides not more than 60 words.You do not say anything like Here is a summary just provide the content"
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Provide a concise summary of the following historical information.Add from your own databases also. If the text is too long, focus on the most important points :\n\n{historical_sources}"
+                    }
+                ],
+                model="llama-3.1-70b-versatile"
+            )
+            
+            # Assuming the API returns a response object with a choices list
+            if hasattr(summary, 'choices') and summary.choices:
+                return summary.choices[0].message.content.strip()
+            else:
+                return str(summary)
+        
+        except Exception as e:
+            print(f"Error in summarization: {e}")
+            return "An error occurred while summarizing the historical information."
+            
+            
 def get_historical_summary(lat, lng, year):
     fetcher = HistoricalContentFetcher()
     return jsonify(fetcher.get_historical_summary(lat, lng, year)),200
