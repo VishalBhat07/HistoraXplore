@@ -118,7 +118,7 @@ const Navbar = () => {
                 </button>
                 {/* Dropdown Menu */}
                 <ul
-                  style={{ zIndex: "11" }}
+                  style={{ zIndex: "1000" }}
                   className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity"
                 >
                   <li>

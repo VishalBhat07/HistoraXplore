@@ -1,102 +1,158 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// Import your images
-import historyImage1 from "../../assets/history3.jpg";
+import { User, Globe, Award, BookOpen } from "lucide-react";
 
 const HistoryPeople = () => {
   const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState("All");
 
-  // Hardcoded data for famous historical places and people
-  const historyData = [
+  // Hardcoded data for famous historical people
+  const historyPeople = [
     {
-      title: "The Pyramids of Giza",
+      category: "Leaders",
+      name: "Nelson Mandela",
+      era: "20th Century",
       description:
-        "One of the Seven Wonders of the Ancient World, the Pyramids of Giza are a testament to the incredible architectural feats of ancient Egypt. These ancient tombs were built for the Pharaohs and have stood for thousands of years.",
-      image: historyImage1,
-      link: "/explore/pyramids-of-giza",
+        "Anti-apartheid revolutionary and South Africa's first democratically elected president. He spent 27 years in prison and became a global symbol of peace and reconciliation.",
+      impact:
+        "Transformed South Africa's political landscape and fought against racial oppression.",
+      icon: <Globe className="w-10 h-10 text-blue-600" />,
     },
     {
-      title: "The Great Wall of China",
+      category: "Scientists",
+      name: "Marie Curie",
+      era: "Late 19th/Early 20th Century",
       description:
-        "Stretching over 13,000 miles, the Great Wall of China is a marvel of ancient engineering. Originally built to protect against invasions, it is now a symbol of China's strength and endurance throughout history.",
-      image: historyImage1,
-      link: "/explore/great-wall-of-china",
+        "Pioneering physicist and chemist who conducted groundbreaking research on radioactivity. First woman to win a Nobel Prize and the first person to win Nobel Prizes in two scientific fields.",
+      impact:
+        "Revolutionized our understanding of radiation and paved the way for cancer treatments.",
+      icon: <Award className="w-10 h-10 text-green-600" />,
     },
     {
-      title: "Leonardo da Vinci",
+      category: "Artists",
+      name: "Frida Kahlo",
+      era: "20th Century",
       description:
-        "Leonardo da Vinci was an Italian polymath of the Renaissance who made lasting contributions in fields such as art, science, engineering, and anatomy. His works, including 'Mona Lisa' and 'The Last Supper,' continue to influence the world today.",
-      image: historyImage1,
-      link: "/explore/leonardo-da-vinci",
+        "Renowned Mexican painter known for her vibrant self-portraits and works inspired by nature and Mexican culture. She challenged traditional artistic and social norms.",
+      impact:
+        "Became an icon of feminism, indigenous Mexican culture, and artistic innovation.",
+      icon: <BookOpen className="w-10 h-10 text-purple-600" />,
     },
     {
-      title: "The Colosseum",
+      category: "Leaders",
+      name: "Mahatma Gandhi",
+      era: "Early 20th Century",
       description:
-        "The Colosseum in Rome, Italy, is an ancient amphitheater built in the 1st century AD. It was used for gladiatorial contests and public spectacles. Today, it is one of the most recognized symbols of Roman architectural and engineering prowess.",
-      image: historyImage1,
-      link: "/explore/colosseum",
+        "Indian independence leader who pioneered non-violent civil disobedience. His philosophy of peaceful resistance inspired civil rights movements worldwide.",
+      impact:
+        "Led India to independence and influenced global peaceful protest movements.",
+      icon: <User className="w-10 h-10 text-red-600" />,
     },
     {
-      title: "Cleopatra",
+      category: "Scientists",
+      name: "Alan Turing",
+      era: "20th Century",
       description:
-        "Cleopatra VII was the last active ruler of the Ptolemaic Kingdom of Egypt. Known for her intelligence, beauty, and political acumen, she formed powerful alliances with Roman leaders such as Julius Caesar and Mark Antony.",
-      image: historyImage1,
-      link: "/explore/cleopatra",
+        "Brilliant mathematician and computer scientist who was crucial in breaking the Nazi Enigma code during World War II and is considered a pioneer of computer science.",
+      impact:
+        "Fundamental to the development of modern computing and artificial intelligence.",
+      icon: <Award className="w-10 h-10 text-green-600" />,
     },
     {
-      title: "Machu Picchu",
+      category: "Artists",
+      name: "Leonardo da Vinci",
+      era: "Renaissance",
       description:
-        "Machu Picchu is a 15th-century Inca citadel located in the Andes Mountains of Peru. It is one of the most well-preserved archaeological sites in South America and a UNESCO World Heritage site.",
-      image: historyImage1, // You can replace this with another relevant image
-      link: "/explore/machu-picchu",
-    },
-    {
-      title: "Albert Einstein",
-      description:
-        "Albert Einstein was a German-born theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics. His famous equation, E=mc², revolutionized the understanding of energy and matter.",
-      image: historyImage1, // Replace with a relevant image
-      link: "/explore/albert-einstein",
+        "Polymath of the Renaissance, excelling in art, science, engineering, and anatomy. Created iconic works like the Mona Lisa and made groundbreaking scientific drawings.",
+      impact:
+        "Epitomized the Renaissance ideal of human potential and interdisciplinary knowledge.",
+      icon: <BookOpen className="w-10 h-10 text-purple-600" />,
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-green-200 via-blue-200 to-purple-300 p-8">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800">
-          Famous Historical Places and People
-        </h1>
-        <p className="text-lg text-gray-600 mt-4">
-          Explore the history of some of the world's most iconic places and
-          individuals.
-        </p>
-      </div>
+  // Filter categories
+  const categories = [
+    "All",
+    ...new Set(historyPeople.map((person) => person.category)),
+  ];
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {historyData.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-lg overflow-hidden"
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold text-gray-800">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 mt-2">{item.description}</p>
-              <button
-                onClick={() => navigate(item.link)}
-                className="mt-4 bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-200"
-              >
-                Learn More
-              </button>
+  // Filter people based on selected category
+  const filteredPeople =
+    activeCategory === "All"
+      ? historyPeople
+      : historyPeople.filter((person) => person.category === activeCategory);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-12">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Legends of History
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Discover the extraordinary individuals who shaped our world,
+            challenged boundaries, and inspired generations.
+          </p>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex justify-center mb-8 space-x-2">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 
+              ${
+                activeCategory === category
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        {/* People Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPeople.map((person, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            >
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  {person.icon}
+                  <div className="ml-4">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {person.name}
+                    </h3>
+                    <p className="text-sm text-gray-500">{person.era}</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4">{person.description}</p>
+                <div className="border-t pt-4">
+                  <h4 className="font-semibold text-gray-800 mb-2">
+                    Historical Impact
+                  </h4>
+                  <p className="text-gray-600 text-sm">{person.impact}</p>
+                </div>
+                <button
+                  onClick={() =>
+                    navigate(
+                      `/explore/${person.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`
+                    )
+                  }
+                  className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+                >
+                  Learn More
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
