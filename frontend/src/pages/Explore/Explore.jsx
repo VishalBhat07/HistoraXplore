@@ -23,7 +23,7 @@ const Explore = () => {
           <Map height="100%" width="100%" output={handleLocation} />
         </div>
 
-        {/* Search Sidebar */}
+        {/* Search Sidebar
         <div className="search-container">
           <div className="info-section">
             {clickedLocation ? (
@@ -43,13 +43,13 @@ const Explore = () => {
             </div>
           </div>
           <button className="search-button">Search</button>
-        </div>
+        </div> */}
       </div>
 
-      {/* Timeline Section */}
+      {/* Timeline Section
       <div className="timeline-container">
         <TimelineScroller minYear={1200} maxYear={2024} output={handleYear} />
-      </div>
+      </div> */}
     </div>
   );
 };
