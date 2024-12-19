@@ -42,7 +42,11 @@ const Navbar = () => {
       <header>
         <nav className="bg-black p-4 flex justify-between items-center border-black">
           {/* Updated logo color to orange */}
-          <div className="font-bold text-5xl text-orange-500">
+          <div
+            className="font-bold text-5xl text-orange-500"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          >
             Histora Xplore
           </div>
           <ul className="flex items-center space-x-4">
