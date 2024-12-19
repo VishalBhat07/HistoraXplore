@@ -1,0 +1,99 @@
+/* Map container with flexbox layout */
+.map-container {
+    display: flex;
+    position: relative;
+    gap: 20px;
+  }
+  
+  /* Map section takes up 70% of the width */
+  .map {
+    height: 100%;
+    width: 70%;
+    border: 2px solid black;
+  }
+  
+  /* Data display section takes up 30% of the width */
+  .data-display {
+    height: 100%;
+    width: 30%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid black;
+  }
+  
+  /* Loading message styles */
+  .loading-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 16px;
+    color: #3498db;
+  }
+  
+  .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s infinite linear;
+    margin-bottom: 10px;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Styling the data card when data is displayed */
+  .data-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .data-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .data-card p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .data-card h4 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  .data-card ul {
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .data-card li {
+    font-size: 1rem;
+    list-style-type: none;
+    margin-bottom: 5px;
+  }
+  
+  .data-card a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  .data-card a:hover {
+    text-decoration: underline;
+  }
+  
